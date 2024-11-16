@@ -1,0 +1,22 @@
+{
+  "name": "drivenrecharge",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "scripts": {
+    "test": "run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasdos/drivenrecharge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonasdos/drivenrecharge/issues"
+  },
+  "homepage": "https://github.com/jonasdos/drivenrecharge#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
