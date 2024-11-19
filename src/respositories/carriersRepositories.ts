@@ -1,6 +1,7 @@
+import { carrier } from "Protocols/types";
 import db from "../data/database";
 
-export async function getAllOperadorasRepository() {
+export async function getAllCarriesRepository() {
   try {
     const resultado = await db.query(`SELECT * FROM carriers`)
     return resultado.rows;
@@ -12,4 +13,10 @@ export async function getAllOperadorasRepository() {
       
     };
   }
+}
+
+export async function NewCarriersRepository(carrierData: carrier) {
+  const resultado = await db.query(`
+    insert 
+    `)
 }

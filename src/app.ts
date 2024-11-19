@@ -1,7 +1,7 @@
 import express, {Request, Response } from "express"
 import 'express-async-errors'
 import dotenv from "dotenv"
-import carriersRouter from "./routes/operadorasRoutes"
+import carriersRouter from "./routes/carriersRoutes"
 import errorHandler from "./middlewares/error-handler"
 dotenv.config() 
 const app = express()
