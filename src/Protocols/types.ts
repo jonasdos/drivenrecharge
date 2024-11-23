@@ -13,9 +13,9 @@ export type CustomError = {
 } 
 
 export type NewPhone = {
+  name: string,
   number: string,
   carrier: string,
-  name: string,
   cpf: string,
   description: string
 }

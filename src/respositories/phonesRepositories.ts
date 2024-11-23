@@ -20,3 +20,63 @@ export async function verifyPhonesByCpf(cpf: string) {
         where clients.cpf = $1`, [cpf])
         return resultado.rows
 }
+
+export async function createNewPhoneRepository(data: NewPhone) {
+    const clientData = await db.query(`
+        select * 
+        from clients 
+        where cpf = $1        
+        `, [data.cpf])
+    console.log("Cliente data: ", clientData.rows[0])
+    if(clientData.rowCount == 0) {
+        const clientId = await db.query(`
+            insert into clients (nome, cpf)
+            values($1, $2)
+            returning *`, [data.name, data.cpf])
+        const carrierId = await db.query(`
+            select *
+            from carriers
+            where name = $1
+            `,[data.carrier])
+        const resultado = await db.query(`
+            insert into phones
+            (number, description, id_carrier, id_client)
+            values($1, $2, $3, $)
+            returning *`, 
+            [data.number, 
+            data.description, 
+            carrierId.rows[0].id, 
+            clientId.rows[0].id])
+            console.log("se não existia cpf...", resultado.rows[0])
+            return resultado.rows[0]
+    } else {
+        console.log("entrou no false...")
+        const carrierId = await db.query(`
+            select *
+            from carriers
+            where name = $1
+            `,[data.carrier])
+            console.log("coletou ", carrierId.rows[0].id)
+        const resultado = await db.query(`
+            insert into phones
+            (number, description, id_carrier, id_client)
+            values($1, $2, $3, $4)
+            returning *`, 
+            [data.number, 
+            data.description, 
+            carrierId.rows[0].id, 
+            clientData.rows[0].id])
+            
+            console.log("se não existia cpf...", resultado.rows[0])
+            return resultado.rows[0]
+
+    }
+}
+export async function verifyCarriersByName(carrierName: string) {
+    const carrierId = await db.query(`
+         select *
+         from carriers
+         where name = $1`,[carrierName])
+         
+    return carrierId.rows[0]
+}

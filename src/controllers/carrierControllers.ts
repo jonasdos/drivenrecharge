@@ -9,7 +9,7 @@ export async function createNewCarrier(req: Request, res: Response) {
         throw {
             type: "Conflict",
             message: "Essa operadora já esta cadastrada"
-        } 
+        } as CustomError
     }
     if(!resultado) {
         resultado = await createNewCarriersService(data)

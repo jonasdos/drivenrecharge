@@ -6,11 +6,12 @@ export default function errorHandler(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+)  {
   if (error.type === "Conflict")  res.status(409).send(error.message);
   if (error.type === "Not Found")  res.status(404).send(error.message);
   if (error.type === "Erro ao criar usuário")  res.status(400).send(error.message);
   if (error.type === "Indisponibilidade")  res.status(422).send(error.message);
-  if (error.type === "DatabaseError")  res.status(400).send(error.message);
-   res.status(500).send("Erro desconhecido");
+  if (error.type === "DatabaseError") res.status(400).send(error.message);
+  res.status(500).send("Erro desconhecido");
+  return 
 }
