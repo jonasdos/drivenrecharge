@@ -1,20 +1,22 @@
 import { Request, Response } from "express"
-import { carrier, Newcarrier } from "Protocols/types"
-import { getAllOperadorasRepository } from "../respositories/carriersRepositories"
-import { NewCarrierService } from "../services/carriersService"
-
-
+import { Error, Newcarrier } from "Protocols/types"
+import { createNewCarriersService, findCarrierService, getAllCarriersService } from "../services/carriersService"
 
 export async function createNewCarrier(req: Request, res: Response) {
     const data = req.body as Newcarrier
-    const resultado: carrier = NewCarrierService(data)
-    res.status(201).send(resultado)
-   
-  
-  
+    let resultado = await findCarrierService(data)
+    if(resultado) {
+        throw {
+            type: "Conflict",
+            message: "Essa operadora já esta cadastrada"
+        } as Error
+    }
+    if(!resultado) {
+        resultado = await createNewCarriersService(data)
+    }
+    res.status(201).send(resultado) 
 }
-
-export async function getAllCarriersController(req: Request, res: Response) {
-  const resultado = await getAllOperadorasRepository()
-  res.status(200).send(resultado)
+export async function getAllCarriers(req: Request, res: Response ) {
+    const data = await getAllCarriersService()
+    res.status(200).send(data)
 }

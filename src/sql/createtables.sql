@@ -6,7 +6,7 @@ CREATE TABLE clients (
 
 CREATE TABLE phones (
     id SERIAL PRIMARY KEY,
-    number CHAR(11) NOT NULL,
+    number CHAR(11) NOT NULL UNIQUE,
     description VARCHAR(255),
     id_carrier INT NOT NULL,
     id_client INT NOT NULL,

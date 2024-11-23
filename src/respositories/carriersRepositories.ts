@@ -1,22 +1,20 @@
-import { carrier } from "Protocols/types";
+import { carrier, Newcarrier } from "Protocols/types";
 import db from "../data/database";
 
-export async function getAllCarriesRepository() {
-  try {
-    const resultado = await db.query(`SELECT * FROM carriers`)
-    return resultado.rows;
-  } catch (error) {
-   
-    throw {
-      type: "DatabaseError",
-      message: "Erro ao buscar operadoras do banco de dados",
-      
-    };
-  }
+export async function findCarriersByName(name: string ){
+  const consultaCarrier = await db.query<carrier>(`select * from carriers where name = $1`, [name])
+  const resultado = consultaCarrier.rows[0]
+  return resultado
+}
+export async function createNewCarriersRepository(data: Newcarrier) {
+  const {name, code} = data
+  const resultado = await db.query<carrier>(`insert into carriers (name, code)
+    values($1, $2)
+    returning *`, [name, code])
+    return resultado.rows[0]
+}
+export async function getAllCarriersRepository(){
+  const resultado = await db.query<carrier>(`select * from carriers`)
+  return resultado.rows
 }
 
-export async function NewCarriersRepository(carrierData: carrier) {
-  const resultado = await db.query(`
-    insert 
-    `)
-}
