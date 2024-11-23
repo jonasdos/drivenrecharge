@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { Error, Newcarrier } from "Protocols/types"
+import { CustomError, Newcarrier } from "Protocols/types"
 import { createNewCarriersService, findCarrierService, getAllCarriersService } from "../services/carriersService"
 
 export async function createNewCarrier(req: Request, res: Response) {
@@ -9,7 +9,7 @@ export async function createNewCarrier(req: Request, res: Response) {
         throw {
             type: "Conflict",
             message: "Essa operadora já esta cadastrada"
-        } as Error
+        } 
     }
     if(!resultado) {
         resultado = await createNewCarriersService(data)

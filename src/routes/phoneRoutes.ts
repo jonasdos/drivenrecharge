@@ -1,9 +1,11 @@
 import { Router } from "express"
-import { validateSchema } from "middlewares/schema-Middleware"
-import newPhoneSchema from "schemas/phonesSchema"
+import { createNewPhone } from "../controllers/phonesControllers"
+import { validateSchema } from "../middlewares/schema-Middleware"
+import newPhoneSchema from "../schemas/phonesSchema"
 
 const phonesRouter = Router()
 
 
-phonesRouter.post("/phones", validateSchema(newPhoneSchema), )
+phonesRouter.post("/phones", validateSchema(newPhoneSchema), createNewPhone)
 
+export default phonesRouter

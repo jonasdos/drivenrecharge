@@ -7,10 +7,10 @@ export type carrier = {
   name: string,
   code: number
 }
-export type Error = {
+export type CustomError = {
   type: string,
   message: string
-} & globalThis.Error
+} 
 
 export type NewPhone = {
   number: string,
@@ -19,3 +19,10 @@ export type NewPhone = {
   cpf: string,
   description: string
 }
+
+export type verifyPhones = {
+  id: number,
+  nome: string,
+  cpf: string,
+  number: string
+}[]
