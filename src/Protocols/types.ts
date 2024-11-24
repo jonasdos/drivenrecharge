@@ -25,4 +25,4 @@ export type verifyPhones = {
   nome: string,
   cpf: string,
   number: string
-}[]
+}

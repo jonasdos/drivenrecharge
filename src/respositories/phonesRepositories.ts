@@ -80,3 +80,14 @@ export async function verifyCarriersByName(carrierName: string) {
          
     return carrierId.rows[0]
 }
+
+export async function findNumbersBycpfRepository(cpf: string) {
+    const resultado = await db.query(`
+        select phones.number, carriers.name, clients.nome 
+        from clients
+        inner join phones on phones.id_client = clients.id
+        inner join carriers on phones.id_carrier = carriers.id
+        where clients.cpf = $1
+                `,[cpf])
+    return resultado.rows
+}

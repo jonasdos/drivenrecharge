@@ -1,5 +1,5 @@
 import { CustomError, NewPhone } from "../Protocols/types";
-import { createNewPhoneRepository, findPhoneByNumber, verifyCarriersByName, verifyPhonesByCpf } from "../respositories/phonesRepositories";
+import { createNewPhoneRepository, findNumbersBycpfRepository, findPhoneByNumber, verifyCarriersByName, verifyPhonesByCpf } from "../respositories/phonesRepositories";
 
 
 export async function NewPhoneNumberService(data: NewPhone){
@@ -31,4 +31,8 @@ if(!carrierIsValid) {
 const resultado = createNewPhoneRepository(data)
 
 return resultado 
+}
+export async function findNumbersBycpfService(cpf: string){
+    const resultado = await findNumbersBycpfRepository(cpf)
+    return resultado
 }
