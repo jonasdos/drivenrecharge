@@ -1,5 +1,5 @@
 import db from "../data/database";
-import { NewPhone, verifyPhones } from "../Protocols/types";
+import { NewPhone } from "../Protocols/types";
 
 
 export async function findPhoneByNumber(number: string) {

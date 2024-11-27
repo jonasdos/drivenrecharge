@@ -26,3 +26,16 @@ export type verifyPhones = {
   cpf: string,
   number: string
 }
+
+export type NewRecharge = {
+  phoneNumber: string,
+  rechargeValue: number,
+  
+}
+export type NewRechargeData = {
+  id: number,
+  number: string,
+  description: string,
+  id_carrier: number,
+  id_client: number
+}

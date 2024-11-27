@@ -21,7 +21,7 @@ CREATE TABLE recharges (
     id_carrier INT NOT NULL,
     carrier_name VARCHAR(255) NOT NULL,
     id_client INT NOT NULL,
-    recharge_value NUMERIC(10, 2) NOT NULL,
+    recharge_value INT NOT NULL,
 	recharge_date DATE NOT NULL,
 	
     FOREIGN KEY (id_phone) REFERENCES phones (id),

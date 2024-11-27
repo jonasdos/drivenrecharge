@@ -5,10 +5,10 @@ export function validateSchema(schema: ObjectSchema) {
   
   return (req: Request, res: Response, next: NextFunction) => {
     const validation = schema.validate(req.body, {abortEarly: false})
-    console.log("Retorno validação")
+
     if(validation.error) {
       res.status(400).send(validation.error.details.map(detail => detail.message))
-
+      return
     }
     next()
   }

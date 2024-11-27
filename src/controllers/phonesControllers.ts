@@ -9,7 +9,7 @@ export async function createNewPhone(req: Request, res: Response) {
 }
 export async function findNumbersBycpf(req: Request<{ document: string }>, res: Response) {
     const data = req.params.document
-    console.log(data)
+    
     const resultado = await findNumbersBycpfService(data)
     res.status(200).send(resultado)
 }

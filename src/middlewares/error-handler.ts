@@ -12,6 +12,7 @@ export default function errorHandler(
   if (error.type === "Erro ao criar usuário")  res.status(400).send(error.message);
   if (error.type === "Indisponibilidade")  res.status(422).send(error.message);
   if (error.type === "DatabaseError") res.status(400).send(error.message);
+  if(error.type === "Erro na função") res.status(400).send(error.message);
   res.status(500).send("Erro desconhecido");
-  return 
+  return
 }

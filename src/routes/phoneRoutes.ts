@@ -7,5 +7,5 @@ const phonesRouter = Router()
 
 
 phonesRouter.post("/phones", validateSchema(newPhoneSchema), createNewPhone)
-phonesRouter.get("/:document", findNumbersBycpf)
+phonesRouter.get("/phones/:document", findNumbersBycpf)
 export default phonesRouter
