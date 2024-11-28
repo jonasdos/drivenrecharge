@@ -2,13 +2,14 @@ import { findNumberForRecharger, findRechargesByPhoneRepository, insertNewRechar
 import { CustomError, NewRecharge, NewRechargeData } from "../Protocols/types";
 
 export async function newRechargeService(data: NewRecharge) {
-    const verifyNumber: NewRechargeData = await findNumberForRecharger(data.phoneNumber)
-    console.log(verifyNumber)
+    const verifyNumber: NewRechargeData | undefined = await findNumberForRecharger(data.phoneNumber)
+    console.log("Verificou se o numero existe", verifyNumber)
     if(!verifyNumber) {
         throw {
             type: "Not Found",
             message: "Esse número não esta cadastrado"
         } as CustomError
+        
     }
     const resutado = await insertNewRechargeRepository(verifyNumber, data)
     

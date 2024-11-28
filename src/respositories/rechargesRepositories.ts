@@ -29,7 +29,7 @@ export async function insertNewRechargeRepository(data: NewRechargeData, values:
 export async function findRechargesByPhoneRepository(number: string) {
     console.log("Chamou repository recharges", number)
     const resultado = await db.query(`
-        select phones.number, carriers.name, carriers.code, clients.nome,
+        select phones.number, carriers.name, carriers.code, clients.name,
 recharges.recharge_value, recharges.recharge_date
 from phones
 inner join carriers on phones.id_carrier = carriers.id

@@ -12,7 +12,7 @@ export async function findPhoneByNumber(number: string) {
 }
 export async function verifyPhonesByCpf(cpf: string) {
     const resultado = await db.query(`
-        select clients.id, clients.nome, clients.cpf, phones.number
+        select clients.id, clients.name, clients.cpf, phones.number
         from clients
         inner join 
         phones
@@ -30,7 +30,7 @@ export async function createNewPhoneRepository(data: NewPhone) {
     console.log("Cliente data: ", clientData.rows[0])
     if(clientData.rowCount == 0) {
         const clientId = await db.query(`
-            insert into clients (nome, cpf)
+            insert into clients (name, cpf)
             values($1, $2)
             returning *`, [data.name, data.cpf])
         const carrierId = await db.query(`
@@ -83,7 +83,7 @@ export async function verifyCarriersByName(carrierName: string) {
 
 export async function findNumbersBycpfRepository(cpf: string) {
     const resultado = await db.query(`
-        select phones.number, carriers.name, clients.nome 
+        select phones.number, carriers.name, clients.name 
         from clients
         inner join phones on phones.id_client = clients.id
         inner join carriers on phones.id_carrier = carriers.id

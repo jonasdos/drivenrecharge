@@ -39,3 +39,26 @@ export type NewRechargeData = {
   id_carrier: number,
   id_client: number
 }
+
+export type sumaryData = {
+  document: string,
+  phones: 
+    {
+      number: string,
+      description: string,
+      carrier: {nome: string, code: number },
+      recharges: { data: Date, value: number }[]
+    }[],
+  
+}
+export type sumaryTable = {
+  cpf: string,
+  number: string,
+  description: string,
+  name: string,
+  code: number,
+  id: number,
+  recharge_date: Date,
+  recharge_value: number
+}
+export type sumaryTables = sumaryTable[]
