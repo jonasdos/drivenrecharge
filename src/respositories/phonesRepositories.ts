@@ -27,7 +27,7 @@ export async function createNewPhoneRepository(data: NewPhone) {
         from clients 
         where cpf = $1        
         `, [data.cpf])
-    console.log("Cliente data: ", clientData.rows[0])
+   
     if(clientData.rowCount == 0) {
         const clientId = await db.query(`
             insert into clients (name, cpf)
@@ -47,16 +47,16 @@ export async function createNewPhoneRepository(data: NewPhone) {
             data.description, 
             carrierId.rows[0].id, 
             clientId.rows[0].id])
-            console.log("se não existia cpf...", resultado.rows[0])
+            
             return resultado.rows[0]
     } else {
-        console.log("entrou no false...")
+       
         const carrierId = await db.query(`
             select *
             from carriers
             where name = $1
             `,[data.carrier])
-            console.log("coletou ", carrierId.rows[0].id)
+           
         const resultado = await db.query(`
             insert into phones
             (number, description, id_carrier, id_client)
@@ -67,7 +67,7 @@ export async function createNewPhoneRepository(data: NewPhone) {
             carrierId.rows[0].id, 
             clientData.rows[0].id])
             
-            console.log("se não existia cpf...", resultado.rows[0])
+           
             return resultado.rows[0]
 
     }

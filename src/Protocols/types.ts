@@ -1,12 +1,12 @@
-export type Newcarrier = {
-  name: string,
-  code: number
-}
-export type carrier = {
+export type Carrier = {
   id: number,
   name: string,
   code: number
 }
+export type NewCarrier = Omit<Carrier, "id">
+
+export type CarriersTable = Carrier[]
+
 export type CustomError = {
   type: string,
   message: string
@@ -39,6 +39,23 @@ export type NewRechargeData = {
   id_carrier: number,
   id_client: number
 }
+export type RechargeDb = {
+  id: number,
+  id_phone: number,
+  id_carrier: number, 
+  carrier_name: string, 
+  id_client: number, 
+  recharge_value: number, 
+  recharge_date: Date
+}
+export type RechargePhone = {
+  number: string,
+  name: string,
+  code: number,
+  recharhe_value: number,
+  recharge_date: Date
+}
+export type RechargesByPhone = RechargePhone[]
 
 export type sumaryData = {
   document: string,

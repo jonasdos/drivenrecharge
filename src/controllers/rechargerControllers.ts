@@ -14,7 +14,6 @@ export async function newRecharger(req: Request, res: Response) {
 }
 export async function findRechargesByPhone(req: Request<{ number: string }>, res: Response){
     const data = req.params.number
-    console.log("get recargas", data)
     const resultado = await findRechargesByPhoneService(data)
     res.status(200).send(resultado)
 

@@ -4,7 +4,7 @@ import { createNewPhoneRepository, findNumbersBycpfRepository, findPhoneByNumber
 
 export async function NewPhoneNumberService(data: NewPhone){
 const numberExists = await findPhoneByNumber(data.number)
-console.log("Validação numero", numberExists)
+
 if(numberExists) {
     throw {
         type: "Conflict",
@@ -13,7 +13,7 @@ if(numberExists) {
 }
 
 const userIsValid = await verifyPhonesByCpf(data.cpf)
-console.log("Validação numeros por cpf",userIsValid.length)
+
 if(userIsValid.length >= 3) {
     throw {
         type: "Conflict",
@@ -21,7 +21,7 @@ if(userIsValid.length >= 3) {
     } as CustomError
 }
 const carrierIsValid = await verifyCarriersByName(data.carrier)
-console.log("Validação operadora",carrierIsValid)
+
 if(!carrierIsValid) {
     throw {
         type: "Indisponibilidade",

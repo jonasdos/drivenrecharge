@@ -1,9 +1,9 @@
-import { NewRecharge, NewRechargeData } from "Protocols/types";
+import { Carrier, NewRecharge, NewRechargeData, RechargeDb, RechargesByPhone } from "../Protocols/types";
 import db from "../data/database";
 
 
 export async function findNumberForRecharger(number: string) {
-    const resultado = await db.query(`
+    const resultado = await db.query<NewRechargeData>(`
         select * 
         from phones
         where number = $1 `, [number])
@@ -12,12 +12,12 @@ export async function findNumberForRecharger(number: string) {
 }
 
 export async function insertNewRechargeRepository(data: NewRechargeData, values: NewRecharge) {
-    const carrierName = await db.query(`
+    const carrierName = await db.query<Carrier>(`
         select * 
         from carriers
         where id =  $1`, [data.id_carrier])
 
-    const resultado =  await db.query(`
+    const resultado =  await db.query<RechargeDb>(`
         insert into recharges
         (id_phone, id_carrier, carrier_name, id_client, recharge_value, recharge_date)
         values($1, $2, $3, $4, $5, $6)
@@ -27,8 +27,8 @@ export async function insertNewRechargeRepository(data: NewRechargeData, values:
 }
 
 export async function findRechargesByPhoneRepository(number: string) {
-    console.log("Chamou repository recharges", number)
-    const resultado = await db.query(`
+   
+    const resultado = await db.query<RechargesByPhone>(`
         select phones.number, carriers.name, carriers.code, clients.name,
 recharges.recharge_value, recharges.recharge_date
 from phones

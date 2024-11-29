@@ -3,9 +3,9 @@ import 'express-async-errors'
 import dotenv from "dotenv"
 import carriersRouter from "./routes/carriersRoutes"
 import phonesRouter from "./routes/phoneRoutes"
-import errorHandler from "./middlewares/error-handler"
 import rechargerRouter from "./routes/rechargerRoutes"
 import sumaryRouter from "./routes/summaryRoutes"
+import errorHandler from "./middlewares/error-handler"
 
 
 dotenv.config() 

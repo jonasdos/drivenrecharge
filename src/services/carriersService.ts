@@ -1,15 +1,25 @@
-import { carrier, Newcarrier } from "Protocols/types";
-import { createNewCarriersRepository, findCarriersByName, getAllCarriersRepository } from "../respositories/carriersRepositories";
+import { Carrier, CustomError, NewCarrier } from "Protocols/types";
+import { createNewCarriersRepository, findCarriersByNameRepository, getAllCarriersRepository } from "../respositories/carriersRepositories";
 
-export async function findCarrierService(data: Newcarrier) {
+export async function findCarrierService(name: string) {
   
-  let resultado = await findCarriersByName(data.name)
+  const resultado: Carrier | undefined = await findCarriersByNameRepository(name)
 
 
   return resultado
 }
 
-export async function createNewCarriersService (data: Newcarrier) {
+export async function createNewCarriersService (data: NewCarrier) {
+
+  const validaCarrier:Carrier | undefined = await findCarrierService(data.name)
+
+
+  if(validaCarrier) {
+    throw {
+      type: "Conflict",
+      message: "Essa operadora já esta cadastrada"
+  } as CustomError
+  } 
   const resultado = await createNewCarriersRepository(data)
   return resultado
 }

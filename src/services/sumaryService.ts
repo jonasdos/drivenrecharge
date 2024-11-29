@@ -26,7 +26,7 @@ export async function sumaryService(cpf: string) {
 
 }
 
-function transformData(data: any[]): sumaryData {
+function transformData(data: sumaryTables): sumaryData {
     const result: sumaryData = {
       document: data[0].cpf, // Assume que todos os objetos têm o mesmo CPF
       phones: [],
@@ -41,11 +41,11 @@ function transformData(data: any[]): sumaryData {
     }>();
   
     data.forEach(item => {
-      const phoneKey = item.number;
+      const phoneNumber = item.number;
   
-      if (!phoneMap.has(phoneKey)) {
+      if (!phoneMap.has(phoneNumber)) {
         // Adiciona uma nova entrada no mapa para o telefone
-        phoneMap.set(phoneKey, {
+        phoneMap.set(phoneNumber, {
           number: item.number,
           description: item.description,
           carrier: {
@@ -55,15 +55,14 @@ function transformData(data: any[]): sumaryData {
           recharges: [],
         });
       }
-  
-      // Adiciona a recarga correspondente ao telefone
-      phoneMap.get(phoneKey)!.recharges.push({
+      phoneMap.get(phoneNumber).recharges.push({
         data: item.recharge_date,
         value: item.recharge_value,
       });
     });
   
     // Converte o mapa em um array para o resultado final
+  
     result.phones = Array.from(phoneMap.values());
   
     return result;
