@@ -41,7 +41,7 @@ export async function createNewPhoneRepository(data: NewPhone) {
         const resultado = await db.query(`
             insert into phones
             (number, description, id_carrier, id_client)
-            values($1, $2, $3, $)
+            values($1, $2, $3, $4)
             returning *`, 
             [data.number, 
             data.description, 

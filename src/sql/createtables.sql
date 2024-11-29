@@ -1,6 +1,6 @@
 CREATE TABLE clients (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     cpf CHAR(11) NOT NULL UNIQUE
 );
 
