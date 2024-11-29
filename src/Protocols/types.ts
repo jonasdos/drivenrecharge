@@ -19,6 +19,26 @@ export type NewPhone = {
   cpf: string,
   description: string
 }
+export type PhoneDb = {
+  id: number,
+  number: string,
+  description: string,
+  id_carrier: number,
+  id_client: number
+}
+export type PhoneByCpf = {
+  id: number,
+  name: string,
+  cpf: string,
+  number: string
+} 
+export type PhonesByCpf = PhoneByCpf[]
+
+export type ClientDb = {
+  id: number,
+  name: string,
+  cpf: string
+}
 
 export type verifyPhones = {
   id: number,
