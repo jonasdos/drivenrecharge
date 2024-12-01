@@ -3,7 +3,7 @@ import { createNewCarriersRepository, findCarriersByNameRepository, getAllCarrie
 
 export async function findCarrierService(name: string) {
   
-  const resultado: Carrier | undefined = await findCarriersByNameRepository(name)
+  const resultado = await findCarriersByNameRepository(name)
 
 
   return resultado
@@ -11,7 +11,7 @@ export async function findCarrierService(name: string) {
 
 export async function createNewCarriersService (data: NewCarrier) {
 
-  const validaCarrier:Carrier | undefined = await findCarrierService(data.name)
+  const validaCarrier = await findCarrierService(data.name)
 
 
   if(validaCarrier) {
