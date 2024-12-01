@@ -1,4 +1,4 @@
-import pg from "pg"
+/*import pg from "pg"
 import dotenv from "dotenv"
 dotenv.config()
 
@@ -10,4 +10,8 @@ const db = new Pool({
   }
 })
 
-export default db
+export default db*/
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient()
+
+export default prisma

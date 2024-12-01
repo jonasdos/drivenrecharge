@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model carriers {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique @db.VarChar(255)
+  code      Int
+  phones    phones[]
+  recharges recharges[]
+}
+
+model clients {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  cpf       String      @unique @db.Char(11)
+  phones    phones[]
+  recharges recharges[]
+}
+
+model phones {
+  id          Int         @id @default(autoincrement())
+  number      String      @unique @db.Char(11)
+  description String?     @db.VarChar(255)
+  id_carrier  Int
+  id_client   Int
+  carriers    carriers    @relation(fields: [id_carrier], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  clients     clients     @relation(fields: [id_client], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  recharges   recharges[]
+}
+
+model recharges {
+  id             Int      @id @default(autoincrement())
+  id_phone       Int
+  id_carrier     Int
+  carrier_name   String   @db.VarChar(255)
+  id_client      Int
+  recharge_value Int
+  recharge_date  DateTime @db.Date
+  carriers       carriers @relation(fields: [id_carrier], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  clients        clients  @relation(fields: [id_client], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  phones         phones   @relation(fields: [id_phone], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
